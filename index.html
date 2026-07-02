@@ -8,6 +8,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-P6BMZ3JT');</script>
 <!-- End Google Tag Manager -->
+<!-- Meta Pixel — đo lead cho quảng cáo Facebook -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '481212815944718');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=481212815944718&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel -->
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Cẩm Nang Chọn & Nuôi Cá Koi (Miễn Phí) — Linh Long Koi Farm</title>
@@ -298,6 +314,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     var clean = ZALO_NUMBER.replace(/\D/g,'');
     document.querySelectorAll('.js-zalo').forEach(function(a){
       if(clean){ a.href = "https://zalo.me/" + clean; a.target="_blank"; a.rel="noopener"; }
+      // Đo lead: bấm nút Zalo = 1 Lead (Pixel) + sự kiện GTM/GA4
+      a.addEventListener('click', function(){
+        if (window.fbq) fbq('track', 'Lead');
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({event: 'lead_zalo_click'});
+      });
+    });
+    // Đo tham gia nhóm Zalo (không tính là Lead chính)
+    document.querySelectorAll('a[href*="zalo.me/g/"]').forEach(function(a){
+      a.addEventListener('click', function(){
+        if (window.fbq) fbq('trackCustom', 'JoinZaloGroup');
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({event: 'join_zalo_group'});
+      });
     });
   })();
 </script>
